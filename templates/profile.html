@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Profile | GovtInsight</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/Profile.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/header.css') }}">
+  <script src="{{ url_for('static', filename='nav.js') }}" defer></script> 
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/footer.css') }}"> 
+</head>
+<header>
+    <img 
+      src="https://i.ibb.co/wZVPystV/Party-Manifesto-and-Govt-Schemes-Implementation-Status-Check-20250327-180457-0000.png" 
+      alt="logo"
+    />
+    <span aria-hidden="true">|</span>
+    <p>GovtInsight</p>
+    <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
+    
+    <ul id="navMenu" class="nav-menu">
+      <li><a href="{{ url_for('home') }}">Home</a></li>
+      <li><a href="{{ url_for('view') }}">View</a></li>
+      <li><a href="{{ url_for('complaint') }}">Complaint</a></li>
+      <li><a href="{{ url_for('login') }}">Login</a></li>
+      
+    </ul>
+</header>
+<body>
+  <div class="container1">
+    <div class="box1">
+      <center>
+        <img src="https://i.ibb.co/zWjjkTL6/profile-1.png" alt="Profile" />
+      </center>
+      <h3>My Profile</h3>
+      <h4> Name : {{current_user.name}}</h4>
+      <h4> Email:{{current_user.email}}</h4>
+      <h4> Phone:{{current_user.phone}} </h4>
+      <h4> Aadhaar :{{current_user.aadhar}}</h4>
+      <center>
+        <button>Save</button>
+      </center>
+    </div>
+
+    <div class="box2">
+      <h3>Voted Promises</h3>
+      <ul>
+        {% for vote in voted_promises %}
+        <li>{{ vote.manifesto.scheme_name }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="box3">
+      <h3>Filed Complaints</h3>
+      <ul>
+        {% for complaint in filed_complaints %}
+        <li>{{ complaint.scheme_name }} <Strong>STATUS: {{complaint.status}}</Strong></li><button> VIEW </button>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; GovtInsight 2025</p>
+    <p>Design & Developed by</p>
+    <p>Saksham Raj Harsh Hemant Nikhil</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Current Central Govt Manifesto | GovtInsight</title>
+  <link rel="stylesheet" href="{{url_for('static',filename='css/cengov.css')}}">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/header.css') }}">
+  <script src="{{ url_for('static', filename='nav.js') }}" defer></script> 
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/footer.css') }}">
+</head>
+<header>
+    <img 
+      src="https://i.ibb.co/wZVPystV/Party-Manifesto-and-Govt-Schemes-Implementation-Status-Check-20250327-180457-0000.png" 
+      alt="logo"
+    />
+    <span aria-hidden="true">|</span>
+    <p>GovtInsight</p>
+    <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
+    
+    <ul id="navMenu" class="nav-menu">
+      <li><a href="{{ url_for('home') }}">Home</a></li>
+      <li><a href="{{ url_for('view') }}">View</a></li>
+      <li><a href="{{ url_for('complaint') }}">Complaint</a></li>
+      <li><a href="{{ url_for('profile') }}">Profile</a></li>
+      <li><a href="{{ url_for('login') }}">Login</a></li>
+      
+    </ul>
+</header>
+<body>
+  <br>
+  <br>
+  <div class="container">
+    <h1>Current Central Govt Manifesto (2024-2029)  <a href=https://www.bjp.org/bjp-manifesto-2024#> BJP Manifesto</a> </h1>
+
+    <div class="manifesto-list">
+      <table>
+        <thead>
+          <tr>
+            <th>Scheme Name</th>
+            <th>Tenure</th>
+            
+            <th>Status</th>
+            <th>Description</th>
+            <th>Source Link</th>
+            <th>Details</th>
+            <th>Actions</th>
+            <th>Upvotes</th>
+            <th>Downvotes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for central in results %}
+          <tr>
+            <td>{{ central.scheme_name }}</td>
+            <td>{{ central.tenure }}</td>
+
+            <td>{{ central.status }}</td>
+            <td>{{ central.description }}</td>
+
+            <td><a href="{{ central.source_link }}" target="_blank">Link</a></td>
+            <td>
+              <button class="details-btn" onclick="showDetails('{{ central.description }}')">Details</button>
+            </td>
+            <td class="actions">
+              <a href="{{ url_for('upvote', scheme_id=central.scheme_id) }}" >Upvote</a> 
+              <a href="{{ url_for('downvote', scheme_id=central.scheme_id ) }}">Downvote</a>
+            </td>
+
+            <td> {{central.total_upvotes}}</td>
+            <td> {{central.total_downvotes}}</td> 
+
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      
+
+
+
+    </div>
+  </div>
+  <footer>
+    <p>&copy; GovtInsight 2025</p>
+    <p>Design & Developed by</p>
+    <p>Saksham Raj Harsh Hemant Nikhil</p>
+  </footer>
+  <script>
+    function upvote(button) {
+      const countSpan = button.querySelector('.count');
+      countSpan.textContent = parseInt(countSpan.textContent) + 1;
+    }
+
+    function downvote(button) {
+      const countSpan = button.querySelector('.count');
+      countSpan.textContent = parseInt(countSpan.textContent) + 1;
+    }
+
+    function showDetails(details) {
+      alert(details);
+    }
+  </script>
+</body>
+</html>

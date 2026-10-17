@@ -1,0 +1,27 @@
+footer {
+  margin: 56px 0 0;
+  padding: 28px clamp(16px, 4vw, 48px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 6px 22px;
+  text-align: center;
+  background: var(--ink);
+  border-top: 3px solid var(--saffron);
+  color: rgba(255, 255, 255, .78);
+  font-size: .9rem;
+}
+
+footer p {
+  margin: 0;
+  font-weight: 500;
+}
+
+footer p:first-child {
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+footer p:last-child { color: var(--saffron); font-weight: 600; }

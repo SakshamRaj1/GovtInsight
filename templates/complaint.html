@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Complaints | GovtInsight</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/Complaint.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/header.css') }}">
+  <script src="{{ url_for('static', filename='nav.js') }}" defer></script> 
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/footer.css') }}"> 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+
+    <header>
+        <img 
+          src="https://i.ibb.co/wZVPystV/Party-Manifesto-and-Govt-Schemes-Implementation-Status-Check-20250327-180457-0000.png" 
+          alt="logo"
+        />
+        <span aria-hidden="true">|</span>
+        <p>GovtInsight</p>
+        <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
+        
+        <ul id="navMenu" class="nav-menu">
+          <li><a href="{{ url_for('home') }}">Home</a></li>
+          <li><a href="{{ url_for('view') }}">View</a></li>
+          <li><a href="{{ url_for('complaint') }}">Complaint</a></li>
+          <li><a href="{{ url_for('profile') }}">Profile</a></li>
+        </ul>
+    </header>
+    
+
+  <div class="fcontainer">
+    <h1 class="header">Track / Register a Complaint</h1>
+
+    <div class="stats-grid">
+      <div class="stat-item">Total Complaints Received: {{ total_complaints }}</div><br>
+      <div class="stat-item">Most Complained Scheme: <u>15 Lakh In Accounts</u></div><br>
+      <div class="stat-item">Total Complaints Resolved: {{ total_resolved }}</div><br>
+    </div>
+
+    <button
+      class="file-complaint-btn"
+      onclick="document.getElementById('complaintForm').scrollIntoView({ behavior: 'smooth' })"
+    >File a Complaint</button>
+
+
+    <div class="search-results">
+      <label class="form-label">Select Manifesto</label>
+      
+      <form id="complaintForm" action="{{ url_for('file_complaint')}}" method="POST" enctype="multipart/form-data" class="complaint-form">
+
+        <select class="input-field" name="scheme_id" required>
+          <option value="">Select Manifesto</option>
+          {% for m in manifestos %}
+            <option value="{{ m.scheme_id }}"  data-name="{{ m.scheme_name }}"> {{ m.scheme_name }} </option>
+          {% endfor %}
+        </select>
+
+       
+
+        <!-- Type of Government -->
+        <label class="form-label">Type of Government
+          <select class="input-field" name="gov_type" required>
+            <option value="">Select</option>
+            <option value="Central">Central</option>
+            <option value="State">State</option>
+            <option value="MCD">MCD</option>
+          </select>
+        </label>
+
+        <!-- Select State/UT -->
+        <label class="form-label">Select State/UT
+          <select class="input-field" name="state">
+            <option value="">Select</option>
+            {% for s in states_and_uts %}
+              <option value="{{ s }}">{{ s }}</option>
+            {% endfor %}
+          </select>
+        </label>
+
+        <!-- Select Tenure -->
+        <label class="form-label">Select Tenure
+          <select class="input-field" name="tenure">
+            <option value="">Select</option>
+            {% for t in tenure_options %}
+              <option value="{{ t }}">{{ t }}</option>
+            {% endfor %}
+          </select>
+        </label>
+
+        <!-- Complaint Description -->
+        <label class="form-label">Complaint Description
+          <textarea class="input-field" name="codescription" required></textarea>
+        </label>
+
+        <!-- Upload Government ID -->
+        <label class="form-label">Upload Government ID
+          <input type="file" class="input-field" name="gov_id" >
+        </label>
+
+        <!-- Upload Supporting Documents -->
+        <label class="form-label">Upload Supporting Documents
+          <input type="file" class="input-field" name="support_docs"  >
+        </label>
+
+        <button type="submit" class="submit-btn">Submit Complaint</button>
+
+      </form>
+    </div>
+
+
+    <div class="chart-container">
+      <canvas id="complaintChart"></canvas>
+    </div>
+
+    {% for c in complaints %}
+    <div class="complaint-number">
+      {{c.scheme_name}} <br>Your Complaint Number: <strong>{{ c.complaint_id }} <br> Description: {{c.description}} <br> Status: {{c.status}}</strong>
+    </div>
+  {% endfor %}
+  </div>
+
+  <footer>
+    <p>&copy; GovtInsight 2025</p>
+    <p>Design & Developed by</p>
+    <p>Saksham Raj Harsh Hemant Nikhil</p>
+</footer>
+
+  <script>
+    const ctx = document.getElementById('complaintChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Complaints'],
+        datasets: [
+          { label: 'Received', data: [{{ total_complaints }}], backgroundColor: '#ffb433', borderRadius: 6 },
+          { label: 'Resolved', data: [{{ total_resolved }}], backgroundColor: '#1f9d6b', borderRadius: 6 }
+        ]
+      },
+      options: {
+        scales: { y: { beginAtZero: true } },
+        responsive: true,
+        plugins: { legend: { position: 'bottom' } }
+      }
+    });
+  </script>
+
+</body>
+</html>

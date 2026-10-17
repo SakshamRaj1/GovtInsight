@@ -1,0 +1,153 @@
+.fcontainer {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: clamp(20px, 4vw, 40px) clamp(14px, 3vw, 32px) 0;
+}
+
+.header {
+  text-align: left;
+  font-size: clamp(1.8rem, 4.4vw, 3rem);
+  margin-bottom: 24px;
+}
+
+/* Stats */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 28px;
+  padding: 0;
+  background: none;
+  border: 0;
+  text-align: left;
+}
+.stats-grid br { display: none; }
+
+.stat-item {
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--teal);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-s);
+  font-weight: 600;
+  color: var(--ink);
+  animation: rise .6s var(--ease) both;
+}
+.stat-item:nth-child(2) { border-left-color: var(--saffron); animation-delay: .08s; }
+.stat-item:nth-child(3) { border-left-color: var(--done);    animation-delay: .16s; }
+.stat-item u { text-decoration: none; display: block; font-family: var(--font-display); font-size: 1.1rem; color: var(--saffron-deep); }
+
+/* Jump-to-form button */
+.file-complaint-btn {
+  display: block;
+  margin: 0 0 24px;
+  padding: 13px 26px;
+  background: var(--saffron);
+  color: var(--ink);
+  border: 0;
+  border-radius: 999px;
+  font-size: 1rem;
+  box-shadow: 0 8px 20px rgba(232, 150, 11, .3);
+  transition: transform .2s var(--ease), box-shadow .2s;
+}
+.file-complaint-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(232, 150, 11, .4); }
+.file-complaint-btn:active { transform: translateY(0); }
+
+/* Form */
+.search-results > .form-label { margin: 0 0 8px; }
+
+.complaint-form {
+  display: grid;
+  gap: 18px;
+  padding: clamp(18px, 3.5vw, 32px);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  box-shadow: var(--shadow-m);
+}
+
+.form-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 600;
+  font-size: .95rem;
+  color: var(--ink);
+}
+
+.input-field {
+  width: 100%;
+  padding: 12px 14px;
+  font-weight: 400;
+  background: var(--paper);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-s);
+  transition: border-color .2s, box-shadow .2s, background .2s;
+}
+textarea.input-field { min-height: 130px; resize: vertical; }
+.input-field:focus {
+  outline: none;
+  background: #fff;
+  border-color: var(--teal);
+  box-shadow: 0 0 0 4px rgba(14, 143, 138, .15);
+}
+input[type="file"].input-field { padding: 10px; cursor: pointer; }
+input[type="file"]::file-selector-button {
+  margin-right: 12px;
+  padding: 7px 14px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  font-family: var(--font-body);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.submit-btn {
+  justify-self: start;
+  padding: 13px 28px;
+  background: var(--ink);
+  color: #fff;
+  border: 0;
+  border-radius: 999px;
+  font-size: 1rem;
+  transition: background .2s, transform .15s var(--ease), box-shadow .2s;
+}
+.submit-btn:hover { background: var(--teal-deep); box-shadow: 0 8px 20px rgba(14, 143, 138, .3); }
+.submit-btn:active { transform: translateY(1px); }
+
+/* Chart */
+.chart-container {
+  margin: 28px 0;
+  padding: clamp(16px, 3vw, 28px);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  box-shadow: var(--shadow-s);
+}
+
+/* Your filed complaints */
+.complaint-number {
+  margin-top: 14px;
+  padding: 18px 20px;
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--progress);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-s);
+  color: var(--muted);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.7;
+}
+.complaint-number strong { color: var(--ink); font-weight: 600; }
+
+@keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 700px) {
+  .stats-grid { grid-template-columns: 1fr; }
+  .submit-btn { justify-self: stretch; }
+}

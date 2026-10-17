@@ -1,0 +1,37 @@
+body {
+    margin: 0;
+    background: #f0f2f5;
+  }
+  
+  .slideshow-container {
+    position: relative;
+    max-width: 1000px;
+    margin: auto;
+  }
+  
+  .mySlides {
+    display: none;
+  }
+  
+  img {
+    vertical-align: middle;
+  }
+  
+  .numbertext {
+    color: #fff;
+    font-size: 14px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+  }
+  
+  .fade {
+    animation-name: fade;
+    animation-duration: 1s;
+  }
+  
+  @keyframes fade {
+    from { opacity: .4 }
+    to { opacity: 1 }
+  }
+  

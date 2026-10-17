@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOVTINSIGHT</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/Main.css') }}"> 
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/header.css') }}">
+  <script src="{{ url_for('static', filename='nav.js') }}" defer></script> 
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/footer.css') }}"> 
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/Slider.css')}}">
+    <script src="{{ url_for('static', filename='Main.js') }}"></script>
+    
+</head>
+
+<header>
+    <img 
+      src="https://i.ibb.co/wZVPystV/Party-Manifesto-and-Govt-Schemes-Implementation-Status-Check-20250327-180457-0000.png" 
+      alt="logo"
+    />
+    <span aria-hidden="true">|</span>
+    <p>GovtInsight Welcome {{current_user.name}}</p>
+    <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
+    
+    <ul id="navMenu" class="nav-menu">
+      <li><a href="{{ url_for('home') }}">Home</a></li>
+      <li><a href="{{ url_for('view') }}">View</a></li>
+      <li><a href="{{ url_for('complaint') }}">Complaint</a></li>
+      <li><a href="{{ url_for('profile') }}">Profile</a></li>
+      <li><a href="{{ url_for('login') }}">Login</a></li>
+      
+    </ul>
+</header>
+<body>
+
+  <div class="slideshow-container">
+    <div class="mySlides fade">
+      <div class="numbertext">1 / 3</div>
+      <img src="https://i.ibb.co/d0qrCzhQ/p12345.png" style="width:100%">
+    </div>
+  
+    <div class="mySlides fade">
+      <div class="numbertext">2 / 3</div>
+      <img src="https://i.ibb.co/pBcGx4jZ/p1234.png" style="width:100%">
+    </div>
+  
+    <div class="mySlides fade">
+      <div class="numbertext">3 / 3</div>
+      <img src="https://i.ibb.co/TqFx6JjW/p123.png" style="width:100%">
+    </div>
+  </div>
+  </div>
+</div>
+
+<div class="circles">
+  <h2>Whose promises do you want to check?</h2>
+  <p class="lede">Open a manifesto to see each scheme, its status, and what citizens say.</p>
+  <div class="container">
+    <a href="{{ url_for('cengov') }}" style="text-decoration: none;">
+      <button class="square-button"
+        style="background-image: url('https://i.ibb.co/jZPFgbHG/250409-171027-0000.jpg');">
+        Central Govt
+      </button>
+    </a>
+
+    <a href="{{ url_for('stategov') }}" style="text-decoration: none;">
+      <button class="square-button"
+        style="background-image: url('https://i.ibb.co/nqTs2zPF/2050409-171135-0000.png');">
+        State Govt
+      </button>
+    </a>
+  </div>
+</div>
+</body>
+<footer>
+  <p>&copy; GovtInsight 2025</p>
+  <p>Design & Developed by</p>
+    <p>Saksham Raj Harsh Hemant Nikhil</p>
+</footer>
+<script>
+function toggleMenu() {
+  const navMenu = document.getElementById('navMenu');
+  navMenu.classList.toggle('active');
+}
+  let slideIndex = 0;
+  showSlides();
+
+  function showSlides() {
+    const slides = document.getElementsByClassName("mySlides");
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) { slideIndex = 1 }
+    slides[slideIndex - 1].style.display = "block";
+    setTimeout(showSlides, 2000);
+  }
+</script>
+

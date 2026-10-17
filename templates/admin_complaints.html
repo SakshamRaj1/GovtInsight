@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Complaints Page</title>
+    <style>
+        table { border-collapse: collapse; width: 80%; margin: 20px auto; }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: center; }
+        select, button { padding: 6px 10px; }
+    </style>
+  <link rel="stylesheet" href="{{url_for('static',filename='css/cengov.css')}}">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/header.css') }}">
+  <script src="{{ url_for('static', filename='nav.js') }}" defer></script> 
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/footer.css') }}">
+</head>
+<header>
+    <img 
+      src="https://i.ibb.co/wZVPystV/Party-Manifesto-and-Govt-Schemes-Implementation-Status-Check-20250327-180457-0000.png" 
+      alt="logo"
+    />
+    <span aria-hidden="true">|</span>
+    <p>GovtInsight</p>
+    <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
+    
+    <ul id="navMenu" class="nav-menu">
+      <li><a href="{{ url_for('home') }}">Home</a></li>
+      <li><a href="{{ url_for('view') }}">View</a></li>
+      <li><a href="{{ url_for('complaint') }}">Complaint</a></li>
+      <li><a href="{{ url_for('profile') }}">Profile</a></li>
+      <li><a href="{{ url_for('login') }}">Login</a></li>
+      
+    </ul>
+</header>
+<body>
+    <h2 style="text-align:center;">Admin - Manage Complaints</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Scheme Name</th>
+                <th>Aadhaar no.</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Update Status</th>
+                <th>Document</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for complaint in complaints %}
+            <tr>
+                <td>{{ complaint.complaint_id }}</td>
+                <td>{{complaint.scheme_name}}</td>
+                <td>{{complaint.user.aadhar}}</td>    
+                <td>{{ complaint.description }}</td>
+                <td>{{ complaint.status }}</td>
+                <td>
+                    <form action="{{ url_for('update_status', complaint_id=complaint.complaint_id) }}" method="POST">
+                        <select name="status">
+                            <option value="Rejected" {% if complaint.status == 'Rejected' %}selected{% endif %}>Rejected</option>
+                            <option value="In Progress" {% if complaint.status == 'In Progress' %}selected{% endif %}>In Progress</option>
+                            <option value="Submitted to Authority" {% if complaint.status == 'Submitted to Authority' %}selected{% endif %}>Submitted to Authority</option>
+                            <option value="Resolved" {% if complaint.status == 'Resolved' %}selected{% endif %}>Resolved</option>
+                        </select>
+                        <button type="submit">Update</button>
+                    </form>
+                </td>
+                <td> <button> VIEW </button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

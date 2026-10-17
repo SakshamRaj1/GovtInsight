@@ -1,0 +1,105 @@
+/* Home: choose a government */
+.circles {
+  max-width: 1100px;
+  margin: 8px auto 0;
+  padding: 32px clamp(16px, 4vw, 32px) 0;
+  background: none;
+}
+
+.circles h2 {
+  text-align: center;
+  font-size: clamp(1.5rem, 3.4vw, 2.2rem);
+  margin-bottom: 4px;
+}
+
+.circles .lede {
+  text-align: center;
+  color: var(--muted);
+  margin: 0 auto 28px;
+  max-width: 46ch;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 3vw, 32px);
+  padding: 0;
+  margin: 0 auto;
+  background: none;
+  border: 0;
+  max-width: none;
+}
+
+.container a { display: block; }
+
+.square-button {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 100%;
+  height: clamp(220px, 32vw, 340px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 24px 26px;
+  border: 0;
+  border-radius: var(--radius-l);
+  background-size: cover;
+  background-position: center;
+  box-shadow: var(--shadow-m);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-align: left;
+  text-shadow: none;
+  transition: transform .45s var(--ease), box-shadow .45s var(--ease), background-size .6s var(--ease);
+  animation: rise .7s var(--ease) both;
+}
+.container a:nth-child(2) .square-button { animation-delay: .12s; }
+
+.square-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(21, 24, 58, 0) 35%, rgba(21, 24, 58, .88) 100%);
+}
+
+.square-button::after {
+  content: "Open manifesto";
+  margin-top: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--saffron);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  transform: translateY(6px);
+  opacity: .0;
+  transition: opacity .3s, transform .3s var(--ease);
+}
+
+.container a:hover .square-button,
+.container a:focus-visible .square-button {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-l);
+  background-size: 108%;
+}
+.container a:hover .square-button::after,
+.container a:focus-visible .square-button::after { opacity: 1; transform: none; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (max-width: 640px) {
+  .container { grid-template-columns: 1fr; }
+  /* no hover on touch: always show the hint */
+  .square-button::after { opacity: 1; transform: none; }
+}

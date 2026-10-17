@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Signup</title>
+  <link rel="stylesheet" href="{{url_for('static',filename='css/signup.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/header.css') }}">
+  <script src="{{ url_for('static', filename='nav.js') }}" defer></script> 
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/footer.css') }}"> 
+</head>
+<header>
+    <img 
+      src="https://i.ibb.co/wZVPystV/Party-Manifesto-and-Govt-Schemes-Implementation-Status-Check-20250327-180457-0000.png" 
+      alt="logo"
+    />
+    <span aria-hidden="true">|</span>
+    <p>GovtInsight</p>
+    <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
+    
+    <ul id="navMenu" class="nav-menu">
+      <li><a href="{{ url_for('home') }}">Home</a></li>
+      <li><a href="{{ url_for('view') }}">View</a></li>
+      <li><a href="{{ url_for('complaint') }}">Complaint</a></li>
+      <li><a href="{{ url_for('login') }}">Login</a></li>
+      
+    </ul>
+</header>
+<body>
+  <div class="signup-container">
+    <div class="signup-box">
+      <h2>Sign Up</h2>
+      <form  method="POST" action="/Signup" id="signup-form" >
+        <input type="text" id="name" name="name" placeholder="Full Name" required />
+        <input type="email" id="email" name="email" placeholder="Email" required />
+        <input type="password" id="password" name="password" placeholder="Password" required />
+        <input type="tel" placeholder="Enter your phone number" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" 
+        aria-label="Phone number"
+        aria-describedby="phone-number-hint" id="phone" name="phone" required>
+
+        <div class="verify-option">
+          <label>Verification Type:</label><br />
+          <label>
+            <input type="radio" name="idOption" value="aadhaar" /> Aadhaar
+          </label>
+          <label style="margin-left: 10px;">
+            <input type="radio" name="idOption" value="pan" /> PAN Card
+          </label>
+        </div>
+
+        <input
+          type="text"
+          id="aadhaar"
+          name="aadhaar"
+          placeholder="Enter Aadhaar Number"
+          style="display: none;"
+        />
+        <input
+          type="text"
+          id="pan"
+          name="pan"
+          placeholder="Enter PAN Number"
+          style="display: none;"
+        />
+
+        <div class="captcha">
+          <label>Captcha: 7 - 2 = ?</label>
+          <input
+            type="text"
+            id="captcha-answer"
+            placeholder="Enter answer"
+            required
+          />
+        </div>
+
+        <button type="submit">Sign Up</button>
+      </form>
+
+      <p>
+        Already have an account?
+        <a href="{{ url_for('login') }}">Login</a>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('signup-form');
+    const captchaAnswer = document.getElementById('captcha-answer');
+    const aadhaarInput = document.getElementById('aadhaar');
+    const panInput = document.getElementById('pan');
+
+    document.querySelectorAll('input[name="idOption"]').forEach((radio) => {
+      radio.addEventListener('change', function () {
+        if (this.value === 'aadhaar') {
+          aadhaarInput.style.display = 'block';
+          panInput.style.display = 'none';
+          aadhaarInput.required = true;
+          panInput.required = false;
+        } else {
+          aadhaarInput.style.display = 'none';
+          panInput.style.display = 'block';
+          aadhaarInput.required = false;
+          panInput.required = true;
+        }
+      });
+    });
+
+  </script>
+</body>
+<footer>
+    <p>&copy; GovtInsight 2025</p>
+    <p>Design & Developed by</p>
+    <p>Saksham Raj Harsh Hemant Nikhil</p>
+  </footer>
+</html>

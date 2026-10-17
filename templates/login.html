@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login | GovtInsight</title>
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/Login.css') }}"> 
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/header.css') }}">
+  <script src="{{ url_for('static', filename='nav.js') }}" defer></script> 
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/footer.css') }}"> 
+</head>
+<header>
+    <img 
+      src="https://i.ibb.co/wZVPystV/Party-Manifesto-and-Govt-Schemes-Implementation-Status-Check-20250327-180457-0000.png" 
+      alt="logo"
+    />
+    <span aria-hidden="true">|</span>
+    <p>GovtInsight</p>
+    <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
+    
+    <ul id="navMenu" class="nav-menu">
+      <li><a href="{{ url_for('home') }}">Home</a></li>
+      <li><a href="{{ url_for('view') }}">View</a></li>
+      <li><a href="{{ url_for('complaint') }}">Complaint</a></li>
+      <li><a href="{{ url_for('login') }}">Login</a></li>
+      
+    </ul>
+</header>
+
+<body>
+  <div class="login-container">
+    <div class="login-box">
+      <h2>Login</h2>
+      <form id="loginForm" method="POST" action="/Login" >
+        <input type="email" placeholder="Email" id="email" name="email" required>
+        <input type="password" placeholder="Password" id="password" name="password" required>
+
+        <div class="captcha">
+          <label>Captcha: 5 + 3 = ?</label>
+          <input type="text" placeholder="Enter answer" id="captchaAnswer" required>
+        </div>
+
+        <button type="submit">Login</button>
+      </form>
+      <p>
+        Don't have an account? <a href="{{ url_for('signup') }}">Sign Up</a>
+      </p>
+    </div>
+  </div>
+  <footer>
+    <p>&copy; GovtInsight 2025</p>
+    <p>Design & Developed by</p>
+    <p>Saksham Raj Harsh Hemant Nikhil</p>
+  </footer>
+
+</body>
+</html>
