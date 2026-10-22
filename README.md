@@ -32,15 +32,12 @@ GovtInsight/
 ├── requirements.txt
 ├── instance/
 ├── static/
-│   ├── css/
-│   ├── js/
-│   └── images/
 ├── templates/
 ├── govtinsight.db
 └── README.md
 
 
-Note: The contents of the static/ and templates/ directories may vary depending on the actual repository structure. The SQLite database may be generated when the application runs.
+Note: The contents of static/ and templates/ depend on the actual repository structure. The SQLite database may be created at runtime.
 
 ⚙️ Installation and Setup
 Prerequisites
@@ -73,3 +70,50 @@ pip install -r requirements.txt
 6. Run the Application
 python app.py
 
+
+Open your browser and visit:
+
+http://127.0.0.1:5000/
+
+🗄️ Database Configuration
+
+GovtInsight uses SQLite by default. The database configuration is defined in config.py.
+
+SQLALCHEMY_DATABASE_URI = 'sqlite:///govtinsight.db'
+
+
+You can change the configuration to use another supported database backend if needed.
+
+🎯 Use Cases
+Public policy transparency platforms
+Government scheme tracking dashboards
+Civic complaint management systems
+Citizen engagement portals
+Government program monitoring applications
+🚀 Future Enhancements
+Integration with official government APIs
+Advanced analytics and interactive dashboards
+Email and SMS notifications for complaint updates
+Scheme search and filtering
+Role-based access control
+Improved security and audit logging
+Production deployment
+🤝 Contributing
+
+Contributions are welcome!
+
+Fork the repository.
+Create a new branch.
+Make your changes.
+Commit your changes.
+Push your branch.
+Open a pull request.
+📄 License
+
+Add a license file if you intend to distribute this project under an open-source license.
+
+🔗 Repository
+
+GovtInsight on GitHub
+
+⭐ If you find this project useful, consider giving the repository a star!
