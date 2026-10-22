@@ -133,17 +133,6 @@ You can change the configuration to use another database backend supported by SQ
 - Improved security and audit logging
 - Production deployment
 
-## 🤝 Contributing
-
-Contributions are welcome!
-
-1. Fork the repository.
-2. Create a new branch.
-3. Make your changes.
-4. Commit your changes.
-5. Push your branch.
-6. Open a pull request.
-
 ## 📄 License
 
 Add a license file if you intend to distribute this project under an open-source license.
@@ -152,4 +141,3 @@ Add a license file if you intend to distribute this project under an open-source
 
 [GovtInsight on GitHub](https://github.com/SakshamRaj1/GovtInsight)
 
-⭐ If you find this project useful, consider giving the repository a star!
